@@ -142,19 +142,13 @@ public class VehicleStaticClass {
     public static Vehicle readsVehicle (Reader in) throws IOException, DuplicateModelNameException, NoSuchModelNameException {
         Scanner scanner = new Scanner(in);
         System.out.println("Введите что надо: ");
-        String string1 = scanner.nextLine();
-        String string2 = scanner.nextLine();
-        Vehicle result = null;
-        int lenght = scanner.nextInt();
-        if (string1.equals("auto"))
-            result = new Auto(string2,0);
-        else result = new Motorcycle(string2,0);
-        for (int i = 0; i < lenght; i++) {
-            result.addModel(scanner.nextLine(),Double.parseDouble(scanner.nextLine()));
-            System.out.println(result);
-            in.close();
-        } return result;
-    }
-    }
+        while (scanner.hasNextLine()) {
+            String [] string = scanner.nextLine().split(" "); {
+                for (String str : string) {
+                    System.out.println(str);
+                }
 
-
+            }
+        }scanner.close();
+        } return null;
+    }
