@@ -1,88 +1,134 @@
-import IVT.Exeptions.DuplicateModelNameException;
-import IVT.Exeptions.NoSuchModelNameException;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
-
-public class Moped implements Vehicle{
+import java.util.Objects;
+import IVT.Exeptions.NoSuchModelNameException;
+import IVT.Exeptions.DuplicateModelNameException;
+import IVT.Exeptions.ModelPriceOutOfBoundsException;
+public class Moped implements Vehicle, Serializable, Cloneable {
+    // 1 поле типа String, хранящее марку автомобиля
     private String mark;
-    private LinkedList<Model> modelArray;
-    @Override
+
+    // 2 метод получения марки автомобиля
     public String getMark() {
         return mark;
     }
 
-    @Override
+    // класс Автомобиль хранит массив моделей
+    private LinkedList<Model> modelLinkedList;
+    private Model[] ModelArray;
+    // 3 метод для модификации марки автомобиля,
     public void setMark(String mark) {
-        this.mark=mark;
-
+        this.mark = mark;
     }
-    private class Model {
-        private String modelName;
-        private double modelPrice;
+    //4 внутренний класс Модель, имеющий поля название модели (уникальное) и её цену, а также конструктор (класс Автомобиль хранит массив Моделей)
 
-        public void setModelPrice(double ModelPrice) {
-            modelPrice = ModelPrice;
+    private class Model implements Serializable, Cloneable {
+        private String ModelName;
+        private double ModelPrice;
+
+        public String getModelName() {
+            return ModelName;
+        }
+
+        public void setModelPrice(double modelPrice) {
+            ModelPrice = modelPrice;
         }
 
         public double getModelPrice() {
-            return modelPrice;
+            return ModelPrice;
         }
 
         public Model(String ModelName, double ModelPrice) {
-            this.modelName = ModelName;
-            this.modelPrice = ModelPrice;
+            this.ModelName = ModelName;
+            this.ModelPrice = ModelPrice;
         }
     }
+
+    // конструктор класса должен принимать Марку и размер массивов Моделей
     public Moped(String Mark, int n) {
         mark = Mark;
-        modelArray = new LinkedList<>();
+        ModelArray = new Model[n];
         for (int i = 0; i < n; i++)
-            modelArray.add(new Model(mark + i, 200 + i));
-        System.out.println(Arrays.toString(modelArray.toArray()));
+            ModelArray[i] = new Model(mark + i, 200 + i);
+        modelLinkedList = new LinkedList<>(Arrays.asList(ModelArray));
     }
-    @Override
+
+    // 5 метод обновления названия модели
     public void setModelName(String oldName, String newName) throws DuplicateModelNameException, NoSuchModelNameException {
-        if (modelArray.contains(oldName));
+        double oldPrice = 0;
+        for (Model model:modelLinkedList)
+            if (Objects.equals(model.getModelName(), oldName))
+                oldPrice=model.getModelPrice();
+        modelLinkedList.removeIf(model -> Objects.equals(model.getModelName(), oldName));
+        modelLinkedList.add(new Model(newName,oldPrice));
 
     }
 
-    @Override
+    // 6.	метод, возвращающий массив названий всех моделей
     public String[] getAllModelNames() {
-        return new String[0];
+        int length = modelLinkedList.size();
+        String[] NamesArray = new String[length];
+        for (int i = 0; i < length; i++) {
+            NamesArray[i] = modelLinkedList.get(i).getModelName();
+        }
+        return NamesArray;
     }
 
-    @Override
+    // 7 метод для получения значения цены модели по её названию
     public double getPriceModelByName(String modelName) throws NoSuchModelNameException {
-        return 0;
+        for (Model model : modelLinkedList)
+            if (model.ModelName.equals(modelName))
+                return model.ModelPrice;
+        throw new NoSuchModelNameException(modelName);
+
     }
 
-    @Override
-    public void setPriceModelByName(String modelName, double price) throws NoSuchModelNameException, DuplicateModelNameException {
-
+    // 8.	метод для модификации значения цены модели по её названию, добавить проверку на цену
+    public void setPriceModelByName(String modelName, double newPrice) throws NoSuchModelNameException {
+        boolean isChange = true;
+        if (newPrice < 0) throw new ModelPriceOutOfBoundsException();
+        for (Model model : modelLinkedList)
+            if (Objects.equals(model.getModelName(), modelName)) {
+                model.setModelPrice(newPrice);
+                isChange = false;
+                break;
+            }
+        if (isChange) throw new NoSuchModelNameException(modelName);
     }
 
-    @Override
+    // 9.	метод, возвращающий массив значений цен моделей
     public double[] getAllModelPrices() {
-        return new double[0];
+        int length = modelLinkedList.size();
+        double[] PricesArray = new double[length];
+        for (int i = 0; i < length; i++)
+            PricesArray[i] = modelLinkedList.get(i).getModelPrice();
+        return PricesArray;
     }
 
-    @Override
-    public void addModel(String modelName, double price) throws DuplicateModelNameException {
+    // 10 метод добавления названия модели и её цены (путем создания нового массива Моделей), использовать метод Arrays.copyOf()
+    public void addModel(String modelName, double modelPrice) throws DuplicateModelNameException {
+        if (modelPrice < 0) throw new ModelPriceOutOfBoundsException();
+        for (Model model : modelLinkedList)
+            if (Objects.equals(model.getModelName(), modelName)) throw new DuplicateModelNameException(modelName);
+        modelLinkedList.add(new Model(modelName, modelPrice));
 
     }
 
-    @Override
-    public void deleteModel(String modelName) throws NoSuchModelNameException {
+    //11 метод удаления модели по заданному имени, использовать методы System.arraycopy, Arrays.copyOf()
+    public void deleteModel(String Name) throws NoSuchModelNameException {
 
     }
 
-    @Override
+    // 12.метод для получения размера массива Моделей.
     public int getSizeModelArray() {
-        return 0;
+        return modelLinkedList.size();
     }
+
+    // 4 лабораторная работа
     public String toString() {
-        StringBuilder stringBuffer = new StringBuilder();
+        StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("Марка ").append(getMark()).append("\n");
         for (int i = 0; i < getAllModelNames().length; i++) {
             stringBuffer.append("Модель ").append(getAllModelNames()[i]).append("\n");
@@ -92,4 +138,26 @@ public class Moped implements Vehicle{
         }
         return stringBuffer.toString();
     }
+
+    // рапсписать через цикл исправить, добавить модели,
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (!(o instanceof Moped)) return false;
+        if (Objects.equals(this.mark, ((Moped) o).mark)) {
+            if (this.getSizeModelArray() == ((Moped) o).getSizeModelArray()) {
+                return Arrays.equals(getAllModelPrices(),((Moped) o).getAllModelPrices());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(mark);
+        result = 31 * result + Arrays.hashCode(ModelArray);
+        return result;
+    }
+
 }
