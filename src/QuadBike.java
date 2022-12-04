@@ -16,7 +16,7 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
 
     // класс Автомобиль хранит массив моделей
     private ArrayList<Model> modelArrayList;
-    private Model[] ModelArray;
+
     // 3 метод для модификации марки автомобиля,
     public void setMark(String mark) {
         this.mark = mark;
@@ -48,10 +48,9 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
     // конструктор класса должен принимать Марку и размер массивов Моделей
     public QuadBike(String Mark, int n) {
         mark = Mark;
-        ModelArray = new Model[n];
+        modelArrayList = new ArrayList<>();
         for (int i = 0; i < n; i++)
-            ModelArray[i] = new Model(mark + i, 200 + i);
-        modelArrayList = new ArrayList<>(Arrays.asList(ModelArray));
+            modelArrayList.add(new Model(mark + i, 200 + i));
     }
 
     // 5 метод обновления названия модели
@@ -136,27 +135,6 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
             stringBuffer.append("Цена модели ").append(getAllModelPrices()[i]).append("\n");
         }
         return stringBuffer.toString();
-    }
-
-    // рапсписать через цикл исправить, добавить модели,
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof QuadBike)) return false;
-        if (Objects.equals(this.mark, ((QuadBike) o).mark)) {
-            if (this.getSizeModelArray() == ((QuadBike) o).getSizeModelArray()) {
-                return Arrays.equals(getAllModelPrices(),((QuadBike) o).getAllModelPrices());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(mark);
-        result = 31 * result + Arrays.hashCode(ModelArray);
-        return result;
     }
 
 }

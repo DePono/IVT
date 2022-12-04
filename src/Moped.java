@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -17,7 +16,6 @@ public class Moped implements Vehicle, Serializable, Cloneable {
 
     // класс Автомобиль хранит массив моделей
     private LinkedList<Model> modelLinkedList;
-    private Model[] ModelArray;
     // 3 метод для модификации марки автомобиля,
     public void setMark(String mark) {
         this.mark = mark;
@@ -49,10 +47,9 @@ public class Moped implements Vehicle, Serializable, Cloneable {
     // конструктор класса должен принимать Марку и размер массивов Моделей
     public Moped(String Mark, int n) {
         mark = Mark;
-        ModelArray = new Model[n];
+        modelLinkedList = new LinkedList<>();
         for (int i = 0; i < n; i++)
-            ModelArray[i] = new Model(mark + i, 200 + i);
-        modelLinkedList = new LinkedList<>(Arrays.asList(ModelArray));
+            modelLinkedList.add(new Model(mark + i, 200 + i));
     }
 
     // 5 метод обновления названия модели
@@ -139,25 +136,5 @@ public class Moped implements Vehicle, Serializable, Cloneable {
         return stringBuffer.toString();
     }
 
-    // рапсписать через цикл исправить, добавить модели,
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof Moped)) return false;
-        if (Objects.equals(this.mark, ((Moped) o).mark)) {
-            if (this.getSizeModelArray() == ((Moped) o).getSizeModelArray()) {
-                return Arrays.equals(getAllModelPrices(),((Moped) o).getAllModelPrices());
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(mark);
-        result = 31 * result + Arrays.hashCode(ModelArray);
-        return result;
-    }
 
 }

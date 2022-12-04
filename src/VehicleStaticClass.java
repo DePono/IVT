@@ -147,8 +147,8 @@ public class VehicleStaticClass {
                 for (String str : string) {
                     System.out.println(str);
                 }
-
             }
         }scanner.close();
-        } return null;
+        return null;
+    }
     }
