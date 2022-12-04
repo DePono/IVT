@@ -116,7 +116,13 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
 
     //11 метод удаления модели по заданному имени, использовать методы System.arraycopy, Arrays.copyOf()
     public void deleteModel(String Name) throws NoSuchModelNameException {
-
+        boolean flag = true;
+        for (Model model : modelArrayList)
+            if (!Objects.equals(model.getModelName(), Name)) {
+                flag=false;
+                modelArrayList.removeIf(nextModel -> nextModel.getModelName().equals(Name));
+            }
+        if (flag) throw new NoSuchModelNameException(Name);
     }
 
     // 12.метод для получения размера массива Моделей.

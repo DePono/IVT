@@ -16,6 +16,7 @@ public class MopedTest {
         System.out.println(Arrays.toString(moped.getAllModelPrices()));
         moped.addModel("Lop",323);
         System.out.println(moped);
+        moped.deleteModel("Stills0");
         System.out.println(moped);
     }
 }

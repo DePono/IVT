@@ -16,6 +16,7 @@ public class QuadBikeTest {
         System.out.println(Arrays.toString(quadBike.getAllModelPrices()));
         quadBike.addModel("Loposa",323);
         System.out.println(quadBike);
+        quadBike.deleteModel("Polosak0");
         System.out.println(quadBike);
     }
 }

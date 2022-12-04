@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Objects;
 import IVT.Exeptions.NoSuchModelNameException;
@@ -15,7 +15,7 @@ public class Moped implements Vehicle, Serializable, Cloneable {
     }
 
     // класс Автомобиль хранит массив моделей
-    private LinkedList<Model> modelLinkedList;
+    private final LinkedList<Model> modelLinkedList;
     // 3 метод для модификации марки автомобиля,
     public void setMark(String mark) {
         this.mark = mark;
@@ -23,7 +23,7 @@ public class Moped implements Vehicle, Serializable, Cloneable {
     //4 внутренний класс Модель, имеющий поля название модели (уникальное) и её цену, а также конструктор (класс Автомобиль хранит массив Моделей)
 
     private class Model implements Serializable, Cloneable {
-        private String ModelName;
+        private final String ModelName;
         private double ModelPrice;
 
         public String getModelName() {
@@ -115,7 +115,13 @@ public class Moped implements Vehicle, Serializable, Cloneable {
 
     //11 метод удаления модели по заданному имени, использовать методы System.arraycopy, Arrays.copyOf()
     public void deleteModel(String Name) throws NoSuchModelNameException {
-
+        boolean flag = true;
+        for (Model model : modelLinkedList)
+            if (!Objects.equals(model.getModelName(), Name)) {
+                flag=false;
+                modelLinkedList.removeIf(nextModel -> nextModel.getModelName().equals(Name));
+            }
+        if (flag) throw new NoSuchModelNameException(Name);
     }
 
     // 12.метод для получения размера массива Моделей.
@@ -125,7 +131,7 @@ public class Moped implements Vehicle, Serializable, Cloneable {
 
     // 4 лабораторная работа
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuffer = new StringBuilder();
         stringBuffer.append("Марка ").append(getMark()).append("\n");
         for (int i = 0; i < getAllModelNames().length; i++) {
             stringBuffer.append("Модель ").append(getAllModelNames()[i]).append("\n");
