@@ -103,15 +103,10 @@ public class VehicleStaticClass {
         return vehicle;
     }
 
-    public static Vehicle setVehicle(String mark, int sizeModelArray, Vehicle vehicle) {
-
-        return vehicle;
-    }
-    // через getAverageprice никакого HashMap
     public static double getVehicleAveragePrices(Vehicle...vehicles) {
         double result = 0;
         for (Vehicle vehicle : vehicles) {
-            result+=averagePrice(vehicle);
+            result+=averagePrice(vehicle)/vehicles.length;
         }
         return result;
     }
