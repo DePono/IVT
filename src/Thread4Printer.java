@@ -11,9 +11,7 @@ public class Thread4Printer implements Runnable {
     public void run() {
         {
             try {
-                for (int i = 0; i < vehicle.getSizeModelArray(); i++) {
-                    System.out.println("Поток " + Thread.currentThread().getName() + "__" +vehicle.getAllModelNames()[i]);
-                }
+                    System.out.println("Поток " + Thread.currentThread().getName() + "__" +vehicle.getMark());
             } catch (Exception e) {
                 throw new RuntimeException();
             }

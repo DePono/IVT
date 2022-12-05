@@ -13,7 +13,7 @@ public class BlockingQueueExample
             "auto5"};
     public BlockingQueueExample()
     {
-        drop = new ArrayBlockingQueue<>(1, true);
+        drop = new ArrayBlockingQueue<>(5, true);
         (new Thread(new Producer())).start();
         (new Thread(new Consumer())).start();
     }

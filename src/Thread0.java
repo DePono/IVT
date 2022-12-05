@@ -7,11 +7,14 @@ public class Thread0 extends Thread {
     }
     public void run (){
         try {
+            System.out.println("Поток " + Thread.currentThread().getName() + " начал работу");
             for (int i = 0; i < vehicle.getSizeModelArray(); i++) {
-                System.out.println("Поток 0 " + vehicle.getAllModelNames()[i]);
+                System.out.println(Thread.currentThread().getName() + " выводит название " + vehicle.getAllModelNames()[i]);
             }
         } catch (Exception e) {
             throw new RuntimeException();
+        } finally {
+            System.out.println(Thread.currentThread().getName()  + " завершил работу");
         }
     }
 }
