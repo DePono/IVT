@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException, IOException, ClassNotFoundException {
@@ -23,6 +24,9 @@ public class Main {
         Vehicle auto2 = new Auto("Pot",3);
         System.out.println(auto2);
         System.out.println("Средняя цена за все автомобили в сумме" + VehicleStaticClass.getVehicleAveragePrices(auto,auto1,auto2));
+        FileWriter fileWriter = new FileWriter("data.txt");
+        VehicleStaticClass.writesVehicle(auto,fileWriter);
+        VehicleStaticClass.readsVehicle();
 /*        System.out.println("Количество моделей в массиве равно = " + auto.getSizeModelArray());
         VehicleStaticClass.printModels(auto);
         System.out.println("Распечатываем цены");

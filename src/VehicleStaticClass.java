@@ -134,8 +134,8 @@ public class VehicleStaticClass {
             throw new RuntimeException(e);
         }printWriter.flush();
     }
-    public static Vehicle readsVehicle (Reader in) throws IOException, DuplicateModelNameException, NoSuchModelNameException {
-        Scanner scanner = new Scanner(in);
+    public static Vehicle readsVehicle () {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите что надо: ");
         while (scanner.hasNextLine()) {
             String [] string = scanner.nextLine().split(" "); {

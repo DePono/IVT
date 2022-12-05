@@ -17,5 +17,6 @@ public class ReflectionTest {
                 throw new RuntimeException(e);
             }
         }
+        System.out.println(VehicleStaticClass.createVehicle(auto, "Solo",2));
     }
 }
