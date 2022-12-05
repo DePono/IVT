@@ -14,8 +14,17 @@ public class ThreadTest {
         thread1.setPriority(Thread.MIN_PRIORITY);
         thread1.start();
         thread0.start();*/
-
-        Lock lock = new ReentrantLock();
+        // Задание 2
+/*        Auto auto = new Auto("Lout",3);
+        VehicleSynchronizer vehicleSynchronizer = new VehicleSynchronizer(auto);
+        Thread20 thread20 = new Thread20(vehicleSynchronizer);
+        Thread21 thread21 = new Thread21(vehicleSynchronizer);
+        Thread thread = new Thread(thread20);
+        Thread thread1 = new Thread(thread21);
+        thread.start();
+        thread1.start();*/
+// Задание 3
+/*        Lock lock = new ReentrantLock();
         Vehicle auto3 = new Auto("AUDI", 10);
         Thread thread30 = new Thread(() -> {
             lock.lock();
@@ -52,7 +61,8 @@ public class ThreadTest {
         });
         thread30.start();
         thread31.start();
-    }
+    }*/
+}
 }
 
 
