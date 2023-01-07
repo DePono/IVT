@@ -6,8 +6,10 @@ import java.util.Arrays;
 public class QuadBikeTest {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException {
         QuadBike quadBike = new QuadBike("Polosak",2);
+        System.out.println("Выведем полученный массив данных");
         System.out.println(quadBike);
         quadBike.setModelName("Polosak1","Poller4");
+        System.out.println("Заменим Polosak1 на Poller4 и выведм на экран");
         System.out.println(quadBike);
         System.out.println(Arrays.toString(quadBike.getAllModelNames()));
         System.out.println(quadBike.getPriceModelByName("Polosak0"));

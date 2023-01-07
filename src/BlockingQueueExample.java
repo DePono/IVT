@@ -1,53 +1,40 @@
+import java.io.*;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-public class BlockingQueueExample
-{
-    private final BlockingQueue<String> drop;
-
-    private final String DONE = "done";
-    private final String[] createFiles = {
-            "auto",
-            "auto2",
-            "auto3",
-            "auto4",
-            "auto5"};
-    public BlockingQueueExample()
-    {
-        drop = new ArrayBlockingQueue<>(5, true);
-        (new Thread(new Producer())).start();
-        (new Thread(new Consumer())).start();
-    }
-
-    class Producer implements Runnable
-    {
-        public void run() {
-            try {
-                int cnt = 0;
-                for (String createFile : createFiles) {
-                    drop.put(createFile);
-                    if (++cnt < 3)
-                        Thread.sleep(2000);
-                }
-                drop.put(DONE);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-    class Consumer implements Runnable
-    {
-        public void run() {
-            try {
-                String msg;
-                while (!((msg = drop.take()).equals(DONE)))
-                    System.out.println(msg);
-            } catch (InterruptedException e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-
+public class BlockingQueueExample {
     public static void main(String[] args) {
-        new BlockingQueueExample();
+
+    final String[] fileNames = {
+            "auto0.txt",
+            "auto1.txt",
+            "auto2.txt",
+            "auto3.txt",
+            "auto4.txt",
+    };
+        ArrayBlockingQueue <Object> autoQueue = new ArrayBlockingQueue<>(1);
+
+        new Thread(() -> {
+            try {
+                for (String fileName : fileNames) {
+                    BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+                    String mark = bufferedReader.readLine();
+                    Vehicle auto = new Auto(mark, 2);
+                    autoQueue.put(auto);
+                    System.out.println("Добавил в очередь " + auto.getMark());
+                    System.out.println("размер очереди " + autoQueue.size());
+                }
+            } catch (IOException | InterruptedException e) {
+                System.err.println(e.getMessage());
+            }
+        }).start();
+        new Thread(() -> {
+            while (true){
+                try {
+                    Vehicle auto = (Vehicle) autoQueue.take();
+                    System.out.println("Забрал из очереди марку авто " + auto.getMark());
+                    System.out.println("размер очереди " + autoQueue.size());
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }}}
+        ).start();
     }
-}
+    }

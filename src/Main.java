@@ -12,11 +12,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException, IOException, ClassNotFoundException {
-        System.out.println("Создаем 2 класса Vehicle");
-/*        Auto auto = new Auto("Audi", 2);
+/*        System.out.println("Создаем 2 класса Vehicle");
+*//*        Auto auto = new Auto("Audi", 2);
         System.out.println(auto);
         Auto auto1 = new Auto("Audi",2);
-        System.out.println(auto1);*/
+        System.out.println(auto1);*//*
         Vehicle auto = new Auto("Pot",3);
         System.out.println(auto);
         Vehicle auto1 = new Auto("Pot",3);
@@ -26,7 +26,7 @@ public class Main {
         System.out.println("Средняя цена за все автомобили в сумме" + VehicleStaticClass.getVehicleAveragePrices(auto,auto1,auto2));
         FileWriter fileWriter = new FileWriter("data.txt");
         VehicleStaticClass.writesVehicle(auto,fileWriter);
-        VehicleStaticClass.readsVehicle();
+        VehicleStaticClass.readsVehicle();*/
 /*        System.out.println("Количество моделей в массиве равно = " + auto.getSizeModelArray());
         VehicleStaticClass.printModels(auto);
         System.out.println("Распечатываем цены");
@@ -81,20 +81,21 @@ public class Main {
         VehicleStaticClass.printModels(vehicleresult2);
         System.out.println("Распечатываем цены");
         VehicleStaticClass.printPrices(vehicleresult2);*/
-/*        FileOutputStream fos = new FileOutputStream("vehicle.txt");
+        Auto auto = new Auto("AIDI",2);
+        FileOutputStream fos = new FileOutputStream("auto10.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(auto);
         oos.close();
         System.out.println("Файл записан");
-        FileInputStream fis = new FileInputStream("vehicle.txt");
+        FileInputStream fis = new FileInputStream("auto10.txt");
         ObjectInputStream ois = new ObjectInputStream(fis);
         Vehicle motor = (Vehicle) ois.readObject();
         System.out.println("Вывод информации о машинах...");
         System.out.println(motor);
-        ois.close();*/
-        // лабораторная 4
+        ois.close();
+ /*       // лабораторная 4
         // консольный ввод
-/*        System.out.println("Введите Auto or Motorcycle");*/
+        System.out.println("Введите Auto or Motorcycle");*/
 /*        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String nameOfClass = reader.readLine();
         System.out.println("Введите модель выбранного транспортного средства");
