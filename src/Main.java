@@ -12,19 +12,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException, IOException, ClassNotFoundException {
-/*        System.out.println("Создаем 2 класса Vehicle");
-*//*        Auto auto = new Auto("Audi", 2);
+        System.out.println("Создаем 3 класса Vehicle");
+/*        Auto auto = new Auto("Audi", 2);
         System.out.println(auto);
         Auto auto1 = new Auto("Audi",2);
-        System.out.println(auto1);*//*
+        System.out.println(auto1);*/
+        //Задание 6
         Vehicle auto = new Auto("Pot",3);
         System.out.println(auto);
         Vehicle auto1 = new Auto("Pot",3);
         System.out.println(auto1);
         Vehicle auto2 = new Auto("Pot",3);
         System.out.println(auto2);
-        System.out.println("Средняя цена за все автомобили в сумме" + VehicleStaticClass.getVehicleAveragePrices(auto,auto1,auto2));
-        FileWriter fileWriter = new FileWriter("data.txt");
+        System.out.println("Средняя цена за все автомобили в сумме " + VehicleStaticClass.getVehicleAveragePrices(auto,auto1,auto2));
+/*        FileWriter fileWriter = new FileWriter("data.txt");
+        // Задание 7
         VehicleStaticClass.writesVehicle(auto,fileWriter);
         VehicleStaticClass.readsVehicle();*/
 /*        System.out.println("Количество моделей в массиве равно = " + auto.getSizeModelArray());
@@ -81,7 +83,7 @@ public class Main {
         VehicleStaticClass.printModels(vehicleresult2);
         System.out.println("Распечатываем цены");
         VehicleStaticClass.printPrices(vehicleresult2);*/
-        Auto auto = new Auto("AIDI",2);
+/*        Auto auto = new Auto("AIDI",2);
         FileOutputStream fos = new FileOutputStream("auto10.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(auto);
@@ -92,7 +94,7 @@ public class Main {
         Vehicle motor = (Vehicle) ois.readObject();
         System.out.println("Вывод информации о машинах...");
         System.out.println(motor);
-        ois.close();
+        ois.close();*/
  /*       // лабораторная 4
         // консольный ввод
         System.out.println("Введите Auto or Motorcycle");*/

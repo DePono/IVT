@@ -102,7 +102,7 @@ public class VehicleStaticClass {
         }
         return vehicle;
     }
-
+    // Задание 6
     public static double getVehicleAveragePrices(Vehicle...vehicles) {
         double result = 0;
         for (Vehicle vehicle : vehicles) {
@@ -110,6 +110,7 @@ public class VehicleStaticClass {
         }
         return result;
     }
+    // Задание 2
     public static Vehicle createVehicle (Vehicle vehicle, String mark, int size){
         try{
             Class<? extends Vehicle> cl = vehicle.getClass();
