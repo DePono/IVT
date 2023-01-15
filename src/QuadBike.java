@@ -83,7 +83,7 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
 
     }
 
-    // 8.	метод для модификации значения цены модели по её названию, добавить проверку на цену
+    // 8.	метод для модификации значения цены модели по её названию,
     public void setPriceModelByName(String modelName, double newPrice) throws NoSuchModelNameException {
         boolean isChange = true;
         if (newPrice < 0) throw new ModelPriceOutOfBoundsException();

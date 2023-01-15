@@ -32,7 +32,7 @@ public class Thread65 implements Runnable {
 
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        ArrayBlockingQueue arrayBlockingQueue = new ArrayBlockingQueue(1);
+        ArrayBlockingQueue arrayBlockingQueue = new ArrayBlockingQueue(6);
         final String[] fileNames = {
                 "auto0.txt",
                 "auto1.txt",
@@ -45,7 +45,6 @@ public class Thread65 implements Runnable {
             Thread65 thread65 = new Thread65(fileReader,arrayBlockingQueue);
             new Thread(thread65).start();
         }
-        Thread.sleep(1000);
         while (arrayBlockingQueue.size()!=0){
             System.out.println("Забрал из очереди " + arrayBlockingQueue.take());
             System.out.println("В очереди " + arrayBlockingQueue.size());

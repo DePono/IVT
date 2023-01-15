@@ -13,18 +13,18 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException, IOException, ClassNotFoundException {
         System.out.println("Создаем 3 класса Vehicle");
-/*        Auto auto = new Auto("Audi", 2);
-        System.out.println(auto);
+        Auto auto = new Auto("Audi", 5);
+/*        System.out.println(auto);
         Auto auto1 = new Auto("Audi",2);
         System.out.println(auto1);*/
         //Задание 6
-        Vehicle auto = new Auto("Pot",3);
+/*        Vehicle auto0 = new Auto("Pot",3);
         System.out.println(auto);
         Vehicle auto1 = new Auto("Pot",3);
         System.out.println(auto1);
         Vehicle auto2 = new Auto("Pot",3);
         System.out.println(auto2);
-        System.out.println("Средняя цена за все автомобили в сумме " + VehicleStaticClass.getVehicleAveragePrices(auto,auto1,auto2));
+        System.out.println("Средняя цена за все автомобили в сумме " + VehicleStaticClass.getVehicleAveragePrices(auto0,auto1,auto2));*/
 /*        FileWriter fileWriter = new FileWriter("data.txt");
         // Задание 7
         VehicleStaticClass.writesVehicle(auto,fileWriter);
@@ -67,7 +67,8 @@ public class Main {
         Vehicle vehicleresult = VehicleStaticClass.inputVehicle(fis);
         System.out.println(vehicleresult.getMark());
         System.out.println(vehicleresult.getSizeModelArray());
-        VehicleStaticClass.printModels(vehicleresult);
+        System.out.println(vehicleresult);*/
+        /*VehicleStaticClass.printModels(vehicleresult);
         System.out.println("Распечатываем цены");
         VehicleStaticClass.printPrices(vehicleresult);
         System.out.println("Сохраним список моделей в файл");
@@ -95,10 +96,10 @@ public class Main {
         System.out.println("Вывод информации о машинах...");
         System.out.println(motor);
         ois.close();*/
- /*       // лабораторная 4
+        // лабораторная 4
         // консольный ввод
-        System.out.println("Введите Auto or Motorcycle");*/
-/*        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+/*        System.out.println("Введите Auto or Motorcycle");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String nameOfClass = reader.readLine();
         System.out.println("Введите модель выбранного транспортного средства");
         String nameOfModel = reader.readLine();

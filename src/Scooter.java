@@ -1,9 +1,9 @@
 import IVT.Exeptions.DuplicateModelNameException;
+import IVT.Exeptions.ModelPriceOutOfBoundsException;
 import IVT.Exeptions.NoSuchModelNameException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
+import java.util.concurrent.TransferQueue;
 
 public class Scooter implements Vehicle{
     private String mark;
@@ -27,11 +27,14 @@ public class Scooter implements Vehicle{
             marksAndPrices.put(mark+i, (double) (200+i));
     }
     @Override
-    public void setModelName(String oldName, String newName) throws DuplicateModelNameException, NoSuchModelNameException  {
-
-        marksAndPrices.remove(oldName);
+    public void setModelName(String oldName, String newName) throws DuplicateModelNameException, NoSuchModelNameException {
+        boolean found = marksAndPrices.containsKey(newName);
+        boolean found2 = marksAndPrices.containsKey(oldName);
+        if (!found2) throw new NoSuchModelNameException(oldName);
         Double oldPrice;
         oldPrice = marksAndPrices.get(oldName);
+        if (found) throw new DuplicateModelNameException(newName);
+        else marksAndPrices.remove(oldName);
         marksAndPrices.put(newName,oldPrice);
     }
     @Override
@@ -41,11 +44,17 @@ public class Scooter implements Vehicle{
     }
     @Override
     public double getPriceModelByName(String modelName) throws NoSuchModelNameException {
+        boolean found = marksAndPrices.containsKey(modelName);
+        marksAndPrices.get(modelName);
+        if (!found) throw new NoSuchModelNameException(modelName);
         return marksAndPrices.get(modelName);
     }
     @Override
-    public void setPriceModelByName(String modelName, double price) throws NoSuchModelNameException, DuplicateModelNameException {
-        marksAndPrices.replace(modelName,price);
+    public void setPriceModelByName(String modelName, double newPrice) throws NoSuchModelNameException {
+        if (newPrice<0) throw new ModelPriceOutOfBoundsException();
+        boolean found = marksAndPrices.containsKey(modelName);
+        marksAndPrices.replace(modelName,newPrice);
+        if (!found) throw new NoSuchModelNameException(modelName);
     }
 
     @Override
@@ -58,13 +67,18 @@ public class Scooter implements Vehicle{
     }
 
     @Override
-    public void addModel(String modelName, double price) throws DuplicateModelNameException {
-        marksAndPrices.put(modelName,price);
+    public void addModel(String modelName, double modelPrice) throws DuplicateModelNameException {
+        if (modelPrice<0) throw new ModelPriceOutOfBoundsException();
+        boolean found = marksAndPrices.containsKey(modelName);
+        if (found) throw new DuplicateModelNameException(modelName);
+        marksAndPrices.put(modelName,modelPrice);
     }
 
     @Override
     public void deleteModel(String modelName) throws NoSuchModelNameException {
-        marksAndPrices.remove(modelName);
+        boolean found = marksAndPrices.containsKey(modelName);
+        if (found) marksAndPrices.remove(modelName);
+        else throw new NoSuchModelNameException(modelName);
     }
 
     @Override
