@@ -55,13 +55,20 @@ public class QuadBike implements Vehicle, Serializable, Cloneable {
 
     // 5 метод обновления названия модели
     public void setModelName(String oldName, String newName) throws DuplicateModelNameException, NoSuchModelNameException {
+        int index;
+        boolean isChange = true;
         double oldPrice = 0;
-        for (Model model:modelArrayList)
-            if (Objects.equals(model.getModelName(), oldName))
-                oldPrice=model.getModelPrice();
-        modelArrayList.removeIf(model -> Objects.equals(model.getModelName(), oldName));
-        modelArrayList.add(new Model(newName,oldPrice));
+        for (QuadBike.Model model : modelArrayList)
+            if (Objects.equals(model.getModelName(),newName)) {throw new DuplicateModelNameException(newName);}
+            else
+            if (Objects.equals(model.getModelName(), oldName)) {
+                index = modelArrayList.indexOf(model);
+                oldPrice = model.getModelPrice();
+                modelArrayList.set(index, new Model(newName,oldPrice));
+                isChange = false;
 
+            }
+        if (isChange) throw new NoSuchModelNameException(oldName);
     }
 
     // 6.	метод, возвращающий массив названий всех моделей

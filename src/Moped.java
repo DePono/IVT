@@ -41,13 +41,21 @@ public class Moped implements Vehicle, Serializable, Cloneable {
             modelLinkedList.add(new Model(mark + i, 200 + i));
     }
     public void setModelName(String oldName, String newName) throws DuplicateModelNameException, NoSuchModelNameException {
+        int index;
+        boolean isChange = true;
         double oldPrice = 0;
-        for (Model model:modelLinkedList)
-            if (Objects.equals(model.getModelName(), oldName))
-                oldPrice=model.getModelPrice();
-        modelLinkedList.removeIf(model -> Objects.equals(model.getModelName(), oldName));
-        modelLinkedList.add(new Model(newName,oldPrice));
-    }
+        for (Model model : modelLinkedList)
+            if (Objects.equals(model.getModelName(),newName)) {throw new DuplicateModelNameException(newName);}
+        else
+            if (Objects.equals(model.getModelName(), oldName)) {
+                index = modelLinkedList.indexOf(model);
+                oldPrice = model.getModelPrice();
+                modelLinkedList.set(index, new Model(newName,oldPrice));
+                isChange = false;
+
+               }
+        if (isChange) throw new NoSuchModelNameException(oldName);
+            }
     public String[] getAllModelNames() {
         int length = modelLinkedList.size();
         String[] NamesArray = new String[length];

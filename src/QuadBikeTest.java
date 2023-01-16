@@ -20,5 +20,6 @@ public class QuadBikeTest {
         System.out.println(quadBike);
         quadBike.deleteModel("Polosak0");
         System.out.println(quadBike);
+        quadBike.setModelName("Polosak1","Poller4");
     }
 }
