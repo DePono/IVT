@@ -7,7 +7,7 @@ public class MopedTest {
     public static void main(String[] args) throws DuplicateModelNameException, NoSuchModelNameException {
         Moped moped = new Moped("Stills",2);
         System.out.println(moped);
-        moped.setModelName("Stills1","Stills90");
+        moped.setModelName("Stills10","Stills90");
         System.out.println(moped);
         System.out.println(Arrays.toString(moped.getAllModelNames()));
         System.out.println(moped.getPriceModelByName("Stills0"));

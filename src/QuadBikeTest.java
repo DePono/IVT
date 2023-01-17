@@ -8,17 +8,17 @@ public class QuadBikeTest {
         QuadBike quadBike = new QuadBike("Polosak",2);
         System.out.println("Выведем полученный массив данных");
         System.out.println(quadBike);
-        quadBike.setModelName("Polosak1","Poller4");
+        quadBike.setModelName("Polosak190","Poller4");
         System.out.println("Заменим Polosak1 на Poller4 и выведм на экран");
         System.out.println(quadBike);
         System.out.println(Arrays.toString(quadBike.getAllModelNames()));
         System.out.println(quadBike.getPriceModelByName("Polosak0"));
-        quadBike.setPriceModelByName("Polosak0",1000);
+        quadBike.setPriceModelByName("Polosak0",-1000);
         System.out.println(quadBike);
         System.out.println(Arrays.toString(quadBike.getAllModelPrices()));
         quadBike.addModel("Loposa",323);
         System.out.println(quadBike);
-        quadBike.deleteModel("Polosak0");
+        quadBike.deleteModel("Polosak00909");
         System.out.println(quadBike);
         quadBike.setModelName("Polosak1","Poller4");
     }

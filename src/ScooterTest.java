@@ -15,7 +15,7 @@ public class ScooterTest {
         Scooter.setPriceModelByName("Stels1",999);
         System.out.println(" Цена модели несуществующей Stels1 " + Scooter.getPriceModelByName("Stels1"));
         System.out.println("Заменим цену у Stels1 ");
-        Scooter.setPriceModelByName("Stels1",999);
+        Scooter.setPriceModelByName("Stels1",-999);
         System.out.println(Scooter);
         System.out.println("Заменим модель Stels3 на Polop");
         Scooter.setModelName("Stels3","Polop");

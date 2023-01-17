@@ -25,10 +25,9 @@ public class Main {
         Vehicle auto2 = new Auto("Pot",3);
         System.out.println(auto2);
         System.out.println("Средняя цена за все автомобили в сумме " + VehicleStaticClass.getVehicleAveragePrices(auto0,auto1,auto2));*/
-/*        FileWriter fileWriter = new FileWriter("data.txt");
-        // Задание 7
+        FileWriter fileWriter = new FileWriter("data.txt");
         VehicleStaticClass.writesVehicle(auto,fileWriter);
-        VehicleStaticClass.readsVehicle();*/
+        VehicleStaticClass.readsVehicle();
 /*        System.out.println("Количество моделей в массиве равно = " + auto.getSizeModelArray());
         VehicleStaticClass.printModels(auto);
         System.out.println("Распечатываем цены");
